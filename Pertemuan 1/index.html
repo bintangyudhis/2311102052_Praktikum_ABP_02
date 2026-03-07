@@ -3,401 +3,117 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>🕋 Ramadan Kareem 1445 H! 🌙</title>
+    <title>Halaman Ramadan</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-    <style>
-      :root {
-        --ramadan-green: #1a472a;
-        --ramadan-light: #2d7a4a;
-        --ramadan-gold: #ffd700;
-        --ramadan-accent: #ff6b6b;
-      }
-
-      body {
-        background: linear-gradient(
-          135deg,
-          var(--ramadan-green) 0%,
-          #0f3820 100%
-        );
-        position: relative;
-        overflow-x: hidden;
-      }
-
-      body::before {
-        content: "";
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-image:
-          radial-gradient(2px 2px at 20px 30px, #eee, rgba(0, 0, 0, 0.2)),
-          radial-gradient(2px 2px at 60px 70px, #fff, rgba(0, 0, 0, 0.3)),
-          radial-gradient(1px 1px at 50px 50px, #ddd, rgba(0, 0, 0, 0.2)),
-          radial-gradient(1px 1px at 130px 80px, #fff, rgba(0, 0, 0, 0.2)),
-          radial-gradient(2px 2px at 90px 10px, #eee, rgba(0, 0, 0, 0.2));
-        background-repeat: repeat;
-        background-size: 200px 200px;
-        z-index: -2;
-        opacity: 0.1;
-      }
-
-      .star-animation {
-        animation: twinkle 3s infinite;
-      }
-
-      @keyframes twinkle {
-        0%,
-        100% {
-          opacity: 0.3;
-        }
-        50% {
-          opacity: 1;
-        }
-      }
-
-      @keyframes slideInDown {
-        from {
-          opacity: 0;
-          transform: translateY(-50px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      @keyframes fadeInUp {
-        from {
-          opacity: 0;
-          transform: translateY(30px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      @keyframes pulse-glow {
-        0%,
-        100% {
-          box-shadow: 0 0 5px rgba(255, 215, 0, 0.3);
-        }
-        50% {
-          box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
-        }
-      }
-
-      @keyframes float {
-        0%,
-        100% {
-          transform: translateY(0px);
-        }
-        50% {
-          transform: translateY(-10px);
-        }
-      }
-
-      .header-title {
-        animation: slideInDown 1s ease-out;
-        font-weight: 900;
-        text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
-        letter-spacing: 2px;
-      }
-
-      .card-ramadan {
-        animation: fadeInUp 0.8s ease-out;
-        border: none;
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(10px);
-        transition: all 0.3s ease;
-        border-radius: 20px;
-      }
-
-      .card-ramadan:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
-      }
-
-      .btn-thr {
-        background: linear-gradient(
-          135deg,
-          var(--ramadan-light) 0%,
-          var(--ramadan-green) 100%
-        );
-        border: 3px solid var(--ramadan-gold);
-        color: white;
-        font-weight: 700;
-        padding: 12px 30px;
-        font-size: 1.1rem;
-        transition: all 0.3s ease;
-        animation: pulse-glow 2s infinite;
-      }
-
-      .btn-thr:hover {
-        transform: scale(1.05);
-        background: linear-gradient(
-          135deg,
-          var(--ramadan-green) 0%,
-          var(--ramadan-light) 100%
-        );
-        color: var(--ramadan-gold);
-        box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);
-      }
-
-      .modal-content {
-        border: 3px solid var(--ramadan-gold);
-        background: linear-gradient(
-          135deg,
-          var(--ramadan-light) 0%,
-          var(--ramadan-green) 100%
-        );
-        border-radius: 20px;
-      }
-
-      .modal-header {
-        border-bottom: 3px solid var(--ramadan-gold);
-        padding: 25px;
-      }
-
-      .modal-title {
-        color: var(--ramadan-gold);
-        font-weight: 900;
-        font-size: 1.8rem;
-      }
-
-      .btn-close-white {
-        filter: brightness(0) invert(1);
-      }
-
-      .badge-ramadan {
-        background: var(--ramadan-accent);
-        border-radius: 50%;
-        width: 80px;
-        height: 80px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 2.5rem;
-        animation: float 3s ease-in-out infinite;
-      }
-
-      .confetti {
-        position: fixed;
-        pointer-events: none;
-      }
-
-      .countdown {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 10px;
-        margin-top: 20px;
-      }
-
-      .countdown-item {
-        background: var(--ramadan-gold);
-        color: var(--ramadan-green);
-        padding: 15px;
-        border-radius: 10px;
-        text-align: center;
-        font-weight: 700;
-      }
-
-      .countdown-item span {
-        display: block;
-        font-size: 1.5rem;
-        margin-bottom: 5px;
-      }
-
-      .countdown-label {
-        font-size: 0.75rem;
-        text-transform: uppercase;
-      }
-
-      .islamic-icon {
-        font-size: 3rem;
-        color: var(--ramadan-gold);
-        margin-bottom: 15px;
-      }
-
-      .card-title {
-        color: var(--ramadan-green);
-        font-weight: 700;
-      }
-    </style>
   </head>
-  <body class="min-vh-100">
-    <!-- Decorative elements -->
-    <div class="position-fixed top-0 start-0 p-3">
-      <i
-        class="fas fa-star star-animation"
-        style="font-size: 2rem; color: var(--ramadan-gold)"
-      ></i>
-    </div>
-    <div class="position-fixed top-10 end-5 p-3">
-      <i
-        class="fas fa-star star-animation"
-        style="
-          font-size: 1.5rem;
-          color: var(--ramadan-gold);
-          animation-delay: 1s;
-        "
-      ></i>
-    </div>
-    <div class="position-fixed bottom-20 start-10 p-3">
-      <i
-        class="fas fa-star star-animation"
-        style="
-          font-size: 1.2rem;
-          color: var(--ramadan-gold);
-          animation-delay: 0.5s;
-        "
-      ></i>
-    </div>
-
-    <!-- Main Content -->
+  <body class="bg-success">
     <div
-      class="container-fluid d-flex flex-column justify-content-center align-items-center py-5 px-3"
+      class="container-fluid min-vh-100 d-flex flex-column justify-content-center align-items-center"
     >
-      <!-- Header -->
-      <div class="text-center mb-5">
-        <h1
-          class="header-title text-light mb-3"
-          style="font-size: clamp(2rem, 8vw, 3.5rem)"
-        >
-          🌙 RAMADAN KAREEM 1445 H 🌙
-        </h1>
-        <p class="text-light fs-5 fw-bold">Bulan Penuh Berkah dan Ampunan</p>
-        <p class="text-light fst-italic mb-0">
-          مِنَ الْعَائِدِيْنَ وَالْفَائِزِيْنَ
-        </p>
+      <div class="text-center text-white mb-4">
+        <h1 class="fw-bold mb-3">Selamat Hari Raya Idul Fitri</h1>
+        <p class="fs-5">مِنَ الْعَائِدِيْنَ وَالْفَائِزِيْنَ</p>
+        <p class="mb-4">Mohon maaf lahir dan batin</p>
       </div>
 
-      <!-- Main Card -->
-      <div class="card-ramadan p-5 mb-5 w-100" style="max-width: 700px">
-        <div class="text-center mb-4">
-          <div class="islamic-icon">
-            <i class="fas fa-mosque"></i>
-          </div>
-          <h2 class="card-title">Selamat Menunaikan Ibadah Puasa</h2>
-          <p class="text-muted mb-0">
-            Semoga ibadah anda diterima dan mendapat keberkahan
-          </p>
-        </div>
-
-        <!-- Countdown Timer -->
-        <div class="text-center">
-          <h5 class="text-muted mb-3">Waktu Berbuka Puasa Hari Ini</h5>
-          <div class="countdown">
-            <div class="countdown-item">
-              <span id="hours">00</span>
-              <div class="countdown-label">Jam</div>
+      <div class="card mb-4" style="width: 400px">
+        <div class="card-body text-center p-5">
+          <h4 class="card-title text-success mb-3">Waktu Berbuka Puasa</h4>
+          <div class="row g-2 mb-3">
+            <div class="col-3">
+              <div class="bg-warning p-2 rounded">
+                <div class="fw-bold" id="hours">00</div>
+                <small>Jam</small>
+              </div>
             </div>
-            <div class="countdown-item">
-              <span id="minutes">00</span>
-              <div class="countdown-label">Menit</div>
+            <div class="col-3">
+              <div class="bg-warning p-2 rounded">
+                <div class="fw-bold" id="minutes">00</div>
+                <small>Menit</small>
+              </div>
             </div>
-            <div class="countdown-item">
-              <span id="seconds">00</span>
-              <div class="countdown-label">Detik</div>
+            <div class="col-3">
+              <div class="bg-warning p-2 rounded">
+                <div class="fw-bold" id="seconds">00</div>
+                <small>Detik</small>
+              </div>
             </div>
-            <div class="countdown-item">
-              <span id="milliseconds">00</span>
-              <div class="countdown-label">Milidetik</div>
+            <div class="col-3">
+              <div class="bg-warning p-2 rounded">
+                <div class="fw-bold" id="milliseconds">00</div>
+                <small>Mdetik</small>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Features Row -->
-      <div class="row g-4 mb-5 w-100" style="max-width: 1000px">
-        <!-- Doa Card -->
-        <div class="col-md-6 col-lg-4">
-          <div class="card-ramadan text-center p-4 h-100">
-            <div class="islamic-icon">
-              <i class="fas fa-book"></i>
-            </div>
-            <h5 class="card-title">Do'a Harian</h5>
-            <p class="text-muted small">
-              Kumpulan do'a pilihan untuk setiap waktu
-            </p>
-            <button
-              class="btn btn-sm"
-              style="background-color: var(--ramadan-light); color: white"
-              data-bs-toggle="modal"
-              data-bs-target="#doaModal"
-            >
-              <i class="fas fa-eye"></i> Baca Do'a
-            </button>
-          </div>
-        </div>
-
-        <!-- Amal Card -->
-        <div class="col-md-6 col-lg-4">
-          <div class="card-ramadan text-center p-4 h-100">
-            <div class="islamic-icon">
-              <i class="fas fa-hand-holding-heart"></i>
-            </div>
-            <h5 class="card-title">Amal Shaleh</h5>
-            <p class="text-muted small">Kerjakan amal baik untuk akhirat</p>
-            <button
-              class="btn btn-sm"
-              style="background-color: var(--ramadan-light); color: white"
-              data-bs-toggle="modal"
-              data-bs-target="#amalModal"
-            >
-              <i class="fas fa-lightbulb"></i> Tips Amal
-            </button>
-          </div>
-        </div>
-
-        <!-- Hadiah Card -->
-        <div class="col-md-6 col-lg-4">
-          <div class="card-ramadan text-center p-4 h-100">
-            <div class="islamic-icon">
-              <i class="fas fa-gift"></i>
-            </div>
-            <h5 class="card-title">Hadiah Spesial</h5>
-            <p class="text-muted small">Dapatkan hadiah eksklusif untuk mu!</p>
-            <button
-              class="btn btn-thr w-100"
-              data-bs-toggle="modal"
-              data-bs-target="#hadiah-modal"
-            >
-              <i class="fas fa-star"></i> BUKA HADIAH
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- THR Button -->
-      <div class="text-center mb-5">
-        <p class="text-light fs-5 mb-3">Kamu beruntung hari ini! 🍀</p>
+      <div class="mb-4">
         <button
-          class="btn btn-thr btn-lg"
+          class="btn btn-warning fw-bold px-4 py-2"
           data-bs-toggle="modal"
-          data-bs-target="#thr-modal"
+          data-bs-target="#thrModal"
         >
-          <i class="fas fa-trophy"></i> CEK HADIAH SPESIALMU!
-          <i class="fas fa-trophy"></i>
+          🏆 Cek Hadiah THR 🏆
         </button>
       </div>
+
+      <div class="row g-3" style="width: 500px">
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body text-center p-3">
+              <h6 class="card-title text-success">📖 Do'a</h6>
+              <button
+                class="btn btn-success btn-sm"
+                data-bs-toggle="modal"
+                data-bs-target="#doaModal"
+              >
+                Lihat
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body text-center p-3">
+              <h6 class="card-title text-success">❤️ Amal</h6>
+              <button
+                class="btn btn-success btn-sm"
+                data-bs-toggle="modal"
+                data-bs-target="#amalModal"
+              >
+                Lihat
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body text-center p-3">
+              <h6 class="card-title text-success">🎁 Hadiah</h6>
+              <button
+                class="btn btn-success btn-sm"
+                data-bs-toggle="modal"
+                data-bs-target="#hadiahModal"
+              >
+                Lihat
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <!-- MODAL: THR HADIAH UTAMA -->
-    <div class="modal fade" id="thr-modal" tabindex="-1" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
+    <!-- Modal THR -->
+    <div class="modal fade" id="thrModal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-success text-white">
           <div class="modal-header">
-            <h5 class="modal-title">
-              <i class="fas fa-star"></i> SELAMAT! <i class="fas fa-star"></i>
+            <h5 class="modal-title fw-bold">
+              Selamat Anda Mendapatkan THR! 🥳
             </h5>
             <button
               type="button"
@@ -405,238 +121,114 @@
               data-bs-dismiss="modal"
             ></button>
           </div>
-          <div class="modal-body text-center text-white py-5">
-            <div
-              style="
-                font-size: 5rem;
-                margin-bottom: 20px;
-                animation: float 2s ease-in-out infinite;
-              "
-            >
-              🥳
+          <div class="modal-body text-center p-4">
+            <p class="fs-5 mb-3">Anda berhasil mendapatkan!</p>
+            <div class="alert alert-light text-dark fw-bold">
+              <h5>Rp 5.000.000</h5>
             </div>
-            <h2 class="fw-bold mb-3">ANDA MENDAPATKAN THR!</h2>
-            <p class="fs-5 mb-4">
-              Selamat! Anda telah terpilih menjadi penerima Tunjangan Hari Raya
-              (THR)
-            </p>
-
-            <div
-              class="alert alert-light text-dark p-4 mb-4"
-              style="border-radius: 15px"
-            >
-              <h4 class="mb-3" style="color: var(--ramadan-accent)">
-                🎁 NOMINAL THR 🎁
-              </h4>
-              <p class="fs-3 fw-bold mb-0" style="color: var(--ramadan-green)">
-                Rp 5.000.000,-
-              </p>
+            <p class="mb-3">Scan QR Code di bawah untuk klaim</p>
+            <div class="bg-light p-3 rounded d-inline-block mb-3">
+              <div class="bg-warning p-4" style="width: 120px">📱</div>
             </div>
-
-            <p class="text-light mb-3">
-              Gunakan QR Code di bawah untuk klaim hadiah Anda:
-            </p>
-
-            <div class="bg-light rounded p-3 mb-4 d-inline-block">
-              <div
-                style="
-                  width: 200px;
-                  height: 200px;
-                  background: linear-gradient(
-                    45deg,
-                    var(--ramadan-gold),
-                    #ffed4e
-                  );
-                  border-radius: 15px;
-                  display: flex;
-                  align-items: center;
-                  justify-content: center;
-                "
-              >
-                <i
-                  class="fas fa-qrcode"
-                  style="font-size: 4rem; color: var(--ramadan-green)"
-                ></i>
-              </div>
-            </div>
-
-            <p class="text-light small">
-              Scan QR Code untuk verifikasi dan klaim THR Anda
-            </p>
           </div>
-          <div class="modal-footer p-4">
+          <div class="modal-footer">
             <button
               type="button"
-              class="btn btn-light text-dark fw-bold"
+              class="btn btn-light text-dark"
               data-bs-dismiss="modal"
             >
-              <i class="fas fa-check"></i> Sudah Dicek!
+              Tutup
             </button>
             <button
               type="button"
-              class="btn btn-warning fw-bold"
+              class="btn btn-warning text-dark fw-bold"
               onclick="shareReward()"
             >
-              <i class="fas fa-share-alt"></i> Bagikan
+              Bagikan
             </button>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- MODAL: DO'A -->
-    <div class="modal fade" id="doaModal" tabindex="-1" aria-hidden="true">
+    <!-- Modal Do'a -->
+    <div class="modal fade" id="doaModal" tabindex="-1">
       <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
+        <div class="modal-content bg-success text-white">
           <div class="modal-header">
-            <h5 class="modal-title"><i class="fas fa-book"></i> Do'a Harian</h5>
+            <h5 class="modal-title fw-bold">📖 Do'a Harian</h5>
             <button
               type="button"
               class="btn-close btn-close-white"
               data-bs-dismiss="modal"
             ></button>
           </div>
-          <div class="modal-body text-white p-4">
-            <div class="mb-4 p-3 bg-dark bg-opacity-25 rounded">
-              <h6 class="fw-bold mb-2">🌅 Do'a Sahur</h6>
-              <p class="mb-1 fst-italic">Allahumma bi rahmatika astawgfiruk</p>
-              <p class="small text-warning">
-                Artinya: Dengan rahmat-Mu aku memohon ampun kepada-Mu
-              </p>
-            </div>
+          <div class="modal-body p-4">
+            <p class="mb-2"><strong>Do'a Sahur:</strong></p>
+            <p class="small mb-3">Allahumma bi rahmatika astawgfiruk</p>
 
-            <div class="mb-4 p-3 bg-dark bg-opacity-25 rounded">
-              <h6 class="fw-bold mb-2">🌆 Do'a Berbuka</h6>
-              <p class="mb-1 fst-italic">
-                Allahumma laka sumtu wa bika amantu wa alaika tawakkaltu
-              </p>
-              <p class="small text-warning">
-                Artinya: Ya Allah, karena-Mu aku berpuasa, kepada-Mu aku
-                beriman...
-              </p>
-            </div>
+            <p class="mb-2"><strong>Do'a Berbuka:</strong></p>
+            <p class="small mb-3">Allahumma laka sumtu wa bika amantu</p>
 
-            <div class="p-3 bg-dark bg-opacity-25 rounded">
-              <h6 class="fw-bold mb-2">✨ Do'a Akhir Ramadan</h6>
-              <p class="mb-1 fst-italic">
-                Allahumma taqabbal minna innaka anta assami'u alaalim
-              </p>
-              <p class="small text-warning">
-                Artinya: Ya Allah, terimalah dari kami, sesungguhnya Engkau Maha
-                Mendengar lagi Maha Mengetahui
-              </p>
-            </div>
+            <p class="mb-2"><strong>Do'a Akhir Ramadan:</strong></p>
+            <p class="small">Allahumma taqabbal minna</p>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- MODAL: AMAL -->
-    <div class="modal fade" id="amalModal" tabindex="-1" aria-hidden="true">
+    <!-- Modal Amal -->
+    <div class="modal fade" id="amalModal" tabindex="-1">
       <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
+        <div class="modal-content bg-success text-white">
           <div class="modal-header">
-            <h5 class="modal-title">
-              <i class="fas fa-hand-holding-heart"></i> Amal Shaleh
-            </h5>
+            <h5 class="modal-title fw-bold">❤️ Amal Shaleh</h5>
             <button
               type="button"
               class="btn-close btn-close-white"
               data-bs-dismiss="modal"
             ></button>
           </div>
-          <div class="modal-body text-white p-4">
-            <div class="mb-3 p-3 bg-dark bg-opacity-25 rounded">
-              <h6 class="fw-bold mb-2">
-                <i class="fas fa-heart"></i> Berbagi dengan Anak Yatim
-              </h6>
-              <p class="small mb-0">
-                Berikan makanan, pakaian, atau pendidikan kepada anak yatim
-              </p>
-            </div>
-
-            <div class="mb-3 p-3 bg-dark bg-opacity-25 rounded">
-              <h6 class="fw-bold mb-2">
-                <i class="fas fa-utensils"></i> Iftar Bersama
-              </h6>
-              <p class="small mb-0">
-                Berbuka puasa bersama keluarga atau orang yang membutuhkan
-              </p>
-            </div>
-
-            <div class="mb-3 p-3 bg-dark bg-opacity-25 rounded">
-              <h6 class="fw-bold mb-2">
-                <i class="fas fa-mosque"></i> Solat Tarawih
-              </h6>
-              <p class="small mb-0">
-                Jalankan salat tarawih di masjid atau rumah setiap malam
-              </p>
-            </div>
-
-            <div class="p-3 bg-dark bg-opacity-25 rounded">
-              <h6 class="fw-bold mb-2">
-                <i class="fas fa-hands"></i> Tilawah Quran
-              </h6>
-              <p class="small mb-0">
-                Baca dan hafal Quran untuk meningkatkan keimanan
-              </p>
-            </div>
+          <div class="modal-body p-4">
+            <p class="mb-2">💚 Berbagi dengan anak yatim</p>
+            <p class="mb-2">🍽️ Berbuka puasa bersama</p>
+            <p class="mb-2">🕌 Solat tarawih setiap malam</p>
+            <p class="mb-2">📚 Tilawah Quran</p>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- MODAL: HADIAH -->
-    <div class="modal fade" id="hadiah-modal" tabindex="-1" aria-hidden="true">
+    <!-- Modal Hadiah -->
+    <div class="modal fade" id="hadiahModal" tabindex="-1">
       <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
+        <div class="modal-content bg-success text-white">
           <div class="modal-header">
-            <h5 class="modal-title">
-              <i class="fas fa-gift"></i> Hadiah Ramadan
-            </h5>
+            <h5 class="modal-title fw-bold">🎁 Hadiah Ramadan</h5>
             <button
               type="button"
               class="btn-close btn-close-white"
               data-bs-dismiss="modal"
             ></button>
           </div>
-          <div class="modal-body text-white p-4">
-            <div class="text-center mb-4">
-              <div style="font-size: 4rem">🎁</div>
+          <div class="modal-body text-center p-4">
+            <p class="mb-3">Setiap amal berkali-kali lipat nilainya!</p>
+            <div class="progress mb-3">
+              <div class="progress-bar bg-warning" style="width: 70%">70%</div>
             </div>
-            <p class="text-center mb-4">
-              Setiap amal yang kamu lakukan di bulan Ramadan memiliki nilai
-              berlipat ganda!
-            </p>
-
-            <div class="progress mb-3" style="height: 25px">
-              <div
-                class="progress-bar"
-                style="width: 65%; background-color: var(--ramadan-gold)"
-                role="progressbar"
-              >
-                <strong style="color: var(--ramadan-green)">65% Selesai</strong>
-              </div>
-            </div>
-
-            <p class="text-light small text-center">
-              Terus semangat menjalankan ibadah untuk mendapatkan hadiah dari
-              Allah SWT!
-            </p>
+            <p class="small">Terus semangat beramal di bulan suci ini!</p>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-      // Countdown Timer
       function updateCountdown() {
         const now = new Date();
         const tonight = new Date();
-        tonight.setHours(18, 0, 0, 0); // Set untuk jam 18:00 (Berbuka Puasa)
+        tonight.setHours(18, 0, 0, 0);
 
         if (now > tonight) {
           tonight.setDate(tonight.getDate() + 1);
@@ -664,63 +256,11 @@
         ).padStart(2, "0");
       }
 
-      // Update countdown setiap 10ms
       setInterval(updateCountdown, 10);
       updateCountdown();
 
-      // Share Reward Function
       function shareReward() {
-        const text =
-          "🥳 Saya mendapatkan THR Rp 5.000.000! Kamu juga bisa! Cek di halaman Ramadan ini! 🌙";
-
-        if (navigator.share) {
-          navigator.share({
-            title: "Ada Hadiah untuk Anda!",
-            text: text,
-            url: window.location.href,
-          });
-        } else {
-          // Fallback untuk browser yang tidak mendukung Share API
-          alert("Hadiah Anda: " + text);
-        }
-      }
-
-      // Confetti Animation saat Modal dibuka
-      const thr_modal = document.getElementById("thr-modal");
-      thr_modal.addEventListener("show.bs.modal", function () {
-        createConfetti();
-      });
-
-      function createConfetti() {
-        const colors = ["#ffd700", "#ff6b6b", "#4ecdc4", "#45b7d1", "#f7b731"];
-
-        for (let i = 0; i < 50; i++) {
-          const confetti = document.createElement("div");
-          confetti.className = "confetti";
-          confetti.innerHTML = "🎉";
-
-          const startX = Math.random() * window.innerWidth;
-          const duration = 2 + Math.random() * 1;
-
-          confetti.style.left = startX + "px";
-          confetti.style.top = "-20px";
-          confetti.style.fontSize = 10 + Math.random() * 20 + "px";
-          confetti.style.opacity = Math.random() * 0.5 + 0.5;
-
-          document.body.appendChild(confetti);
-
-          let top = -20;
-          const interval = setInterval(() => {
-            top += 5 + Math.random() * 5;
-            confetti.style.top = top + "px";
-            confetti.style.left = startX + Math.sin(top / 50) * 100 + "px";
-
-            if (top > window.innerHeight) {
-              clearInterval(interval);
-              confetti.remove();
-            }
-          }, 20);
-        }
+        alert("Hadiah: Rp 5.000.000 - Bagikan ke teman-teman!");
       }
     </script>
   </body>
