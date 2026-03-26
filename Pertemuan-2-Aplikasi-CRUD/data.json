@@ -1,0 +1,27 @@
+[
+  {
+    "id": "_sample001",
+    "nama": "Bintang Yudhistira",
+    "nim": "2311102052",
+    "email": "bintang@email.com",
+    "jurusan": "Teknik Informatika",
+    "tanggalTambah": "25/3/2024, 10:30:45"
+  },
+  {
+    "id": "_xzrfh2xde",
+    "nama": "Revansa Shafira Yunita",
+    "nim": "230221100098",
+    "email": "revansashafira@gmail.com",
+    "jurusan": "Sistem Informasi",
+    "tanggalTambah": "25/3/2026, 19.21.21",
+    "tanggalUpdate": "25/3/2026, 19.22.26"
+  },
+  {
+    "id": "_k2y73gfqx",
+    "nama": "HAI",
+    "nim": "1234",
+    "email": "hai@gmail.com",
+    "jurusan": "Ilmu Komputer",
+    "tanggalTambah": "26/3/2026, 22.24.42"
+  }
+]

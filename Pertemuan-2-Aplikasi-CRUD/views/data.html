@@ -1,0 +1,543 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Data Siswa - Aplikasi CRUD Siswa</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    />
+    <!-- Font Awesome Icon -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <!-- DataTable CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css"
+    />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <!-- NAVBAR -->
+    <nav
+      class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top shadow"
+    >
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/">
+          <i class="fas fa-graduation-cap"></i> Aplikasi CRUD Siswa
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="fas fa-home"></i> Beranda
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/form">
+                <i class="fas fa-edit"></i> Input Data
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="/data">
+                <i class="fas fa-table"></i> Lihat Data
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main class="min-vh-100 py-5" style="background-color: #f8f9fa">
+      <div class="container-fluid">
+        <!-- HEADER SECTION -->
+        <div class="row mb-4">
+          <div class="col-12">
+            <div class="card shadow-lg border-0">
+              <div
+                class="card-header bg-primary text-white d-flex justify-content-between align-items-center"
+              >
+                <h4 class="mb-0">
+                  <i class="fas fa-table"></i> Tabel Data Siswa
+                </h4>
+                <span class="badge bg-light text-primary fs-6">
+                  <i class="fas fa-users"></i> Total:
+                  <span id="totalData">0</span>
+                </span>
+              </div>
+
+              <!-- TOOLBAR -->
+              <div class="card-body border-bottom bg-light">
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <button
+                      class="btn btn-success btn-lg"
+                      onclick="location.href = '/form'"
+                    >
+                      <i class="fas fa-plus-circle"></i> Tambah Data Baru
+                    </button>
+                  </div>
+                  <div class="col-md-6 text-end">
+                    <button class="btn btn-info btn-lg" id="btnRefresh">
+                      <i class="fas fa-sync-alt"></i> Refresh Data
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- TABLE SECTION -->
+              <div class="card-body">
+                <!-- Alert -->
+                <div id="alertContainer"></div>
+
+                <!-- DataTable -->
+                <div class="table-responsive">
+                  <table
+                    id="tableSiswa"
+                    class="table table-striped table-hover"
+                  >
+                    <thead class="table-primary text-white">
+                      <tr>
+                        <th width="5%">No</th>
+                        <th>Nama</th>
+                        <th>NIM</th>
+                        <th>Email</th>
+                        <th>Jurusan</th>
+                        <th width="15%">Aksi</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <!-- Data akan diambil dari JSON API -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- MODAL EDIT DATA -->
+    <div class="modal fade" id="modalEdit" tabindex="-1">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header bg-info text-white">
+            <h5 class="modal-title">
+              <i class="fas fa-edit"></i> Edit Data Siswa
+            </h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form id="formEdit">
+              <input type="hidden" id="editId" />
+
+              <div class="mb-3">
+                <label for="editNama" class="form-label fw-bold">Nama</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="editNama"
+                  required
+                />
+              </div>
+
+              <div class="mb-3">
+                <label for="editNim" class="form-label fw-bold">NIM</label>
+                <input type="text" class="form-control" id="editNim" required />
+              </div>
+
+              <div class="mb-3">
+                <label for="editEmail" class="form-label fw-bold">Email</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="editEmail"
+                  required
+                />
+              </div>
+
+              <div class="mb-3">
+                <label for="editJurusan" class="form-label fw-bold"
+                  >Jurusan</label
+                >
+                <select class="form-select" id="editJurusan" required>
+                  <option value="">-- Pilih Jurusan --</option>
+                  <option value="Teknik Informatika">Teknik Informatika</option>
+                  <option value="Sistem Informasi">Sistem Informasi</option>
+                  <option value="Manajemen Informatika">
+                    Manajemen Informatika
+                  </option>
+                  <option value="Teknik Komputer">Teknik Komputer</option>
+                  <option value="Ilmu Komputer">Ilmu Komputer</option>
+                </select>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              <i class="fas fa-times"></i> Batal
+            </button>
+            <button type="button" class="btn btn-info" id="btnSaveEdit">
+              <i class="fas fa-save"></i> Simpan Perubahan
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL HAPUS DATA -->
+    <div class="modal fade" id="modalHapus" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header bg-danger text-white">
+            <h5 class="modal-title">
+              <i class="fas fa-trash"></i> Konfirmasi Hapus Data
+            </h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <p class="mb-0">
+              <i class="fas fa-exclamation-triangle text-warning"></i>
+              Apakah Anda yakin ingin menghapus data ini? Tindakan ini tidak
+              dapat dibatalkan.
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              <i class="fas fa-times"></i> Batal
+            </button>
+            <button type="button" class="btn btn-danger" id="btnConfirmHapus">
+              <i class="fas fa-trash"></i> Hapus
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-dark text-white text-center py-3 mt-5">
+      <div class="container-fluid">
+        <p class="mb-0">
+          © 2024 Aplikasi CRUD Siswa | Dibuat dengan
+          <i class="fas fa-heart text-danger"></i> untuk Praktikum ABP
+        </p>
+      </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- DataTable JS -->
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+    <!-- Custom JS -->
+    <script src="/js/script.js"></script>
+
+    <script>
+      // =====================================
+      // VARIABEL GLOBAL
+      // =====================================
+      let table; // DataTable instance
+      let deleteId = null; // ID data yang akan dihapus
+      const modalEdit = new bootstrap.Modal(
+        document.getElementById("modalEdit"),
+      );
+      const modalHapus = new bootstrap.Modal(
+        document.getElementById("modalHapus"),
+      );
+
+      // =====================================
+      // INISIALISASI HALAMAN
+      // =====================================
+      $(document).ready(function () {
+        // Inisialisasi DataTable
+        initDataTable();
+
+        // Load data dari API
+        loadData();
+
+        // Event listener refresh button
+        $("#btnRefresh").on("click", function () {
+          $(this).find("i").addClass("fa-spin");
+          loadData();
+          setTimeout(() => {
+            $(this).find("i").removeClass("fa-spin");
+          }, 1000);
+        });
+
+        // Event listener save edit button
+        $("#btnSaveEdit").on("click", updateData);
+
+        // Event listener confirm hapus button
+        $("#btnConfirmHapus").on("click", hapusData);
+      });
+
+      // =====================================
+      // INISIALISASI DATATABLE
+      // =====================================
+      function initDataTable() {
+        table = $("#tableSiswa").DataTable({
+          language: {
+            url: "https://cdn.datatables.net/plug-ins/1.13.7/i18n/id.json",
+          },
+          columnDefs: [
+            { orderable: false, targets: [0, 5] }, // No & Aksi columns tidak sortable
+          ],
+          order: [[1, "asc"]], // Sort by nama
+          pageLength: 10,
+          lengthMenu: [
+            [5, 10, 25, 50],
+            [5, 10, 25, 50],
+          ],
+          dom: "lBfrtip",
+          buttons: ["copy", "csv", "excel", "print"],
+        });
+      }
+
+      // =====================================
+      // LOAD DATA DARI API (READ)
+      // =====================================
+      function loadData() {
+        $.ajax({
+          url: "/api/siswa",
+          type: "GET",
+          dataType: "json",
+          success: function (response) {
+            // Clear tabel
+            table.clear();
+
+            // Variable untuk nomor urut
+            let no = 1;
+
+            // Loop response dan tambah ke tabel
+            $.each(response, function (index, siswa) {
+              const aksi = `
+              <button class="btn btn-sm btn-warning" title="Edit" onclick="editData('${siswa.id}')">
+                <i class="fas fa-edit"></i> Edit
+              </button>
+              <button class="btn btn-sm btn-danger" title="Hapus" onclick="konfirmasiHapus('${siswa.id}')">
+                <i class="fas fa-trash"></i> Hapus
+              </button>
+            `;
+
+              table.row
+                .add([
+                  no++,
+                  siswa.nama,
+                  siswa.nim,
+                  siswa.email,
+                  siswa.jurusan,
+                  aksi,
+                ])
+                .draw(false);
+            });
+
+            // Redraw tabel
+            table.draw();
+
+            // Update total data
+            $("#totalData").text(response.length);
+
+            // Tampilkan alert jika data kosong
+            if (response.length === 0) {
+              showAlert(
+                "Belum ada data siswa. Mulai dengan menambah data baru!",
+                "info",
+              );
+            }
+          },
+          error: function () {
+            showAlert("Gagal memuat data siswa", "danger");
+          },
+        });
+      }
+
+      // =====================================
+      // EDIT DATA
+      // =====================================
+      function editData(id) {
+        $.ajax({
+          url: "/api/siswa/" + id,
+          type: "GET",
+          dataType: "json",
+          success: function (response) {
+            if (response.success) {
+              const siswa = response.data;
+
+              // Isi form modal dengan data
+              $("#editId").val(siswa.id);
+              $("#editNama").val(siswa.nama);
+              $("#editNim").val(siswa.nim);
+              $("#editEmail").val(siswa.email);
+              $("#editJurusan").val(siswa.jurusan);
+
+              // Buka modal
+              modalEdit.show();
+            }
+          },
+          error: function () {
+            showAlert("Gagal memuat data siswa", "danger");
+          },
+        });
+      }
+
+      // =====================================
+      // UPDATE DATA (UPDATE)
+      // =====================================
+      function updateData() {
+        const id = $("#editId").val();
+        const nama = $("#editNama").val().trim();
+        const nim = $("#editNim").val().trim();
+        const email = $("#editEmail").val().trim();
+        const jurusan = $("#editJurusan").val().trim();
+
+        // Validasi
+        if (!nama || !nim || !email || !jurusan) {
+          showAlert("Semua field harus diisi", "danger");
+          return;
+        }
+
+        // Disable button
+        $("#btnSaveEdit")
+          .prop("disabled", true)
+          .html('<i class="fas fa-spinner fa-spin"></i> Menyimpan...');
+
+        $.ajax({
+          url: "/api/siswa/" + id,
+          type: "PUT",
+          contentType: "application/json",
+          data: JSON.stringify({
+            nama: nama,
+            nim: nim,
+            email: email,
+            jurusan: jurusan,
+          }),
+          success: function (response) {
+            if (response.success) {
+              showAlert(response.message, "success");
+              modalEdit.hide();
+              loadData();
+
+              // Reset button
+              $("#btnSaveEdit")
+                .prop("disabled", false)
+                .html('<i class="fas fa-save"></i> Simpan Perubahan');
+            }
+          },
+          error: function () {
+            showAlert("Gagal mengupdate data", "danger");
+            $("#btnSaveEdit")
+              .prop("disabled", false)
+              .html('<i class="fas fa-save"></i> Simpan Perubahan');
+          },
+        });
+      }
+
+      // =====================================
+      // KONFIRMASI HAPUS DATA
+      // =====================================
+      function konfirmasiHapus(id) {
+        deleteId = id;
+        modalHapus.show();
+      }
+
+      // =====================================
+      // HAPUS DATA (DELETE)
+      // =====================================
+      function hapusData() {
+        if (!deleteId) return;
+
+        // Disable button
+        $("#btnConfirmHapus")
+          .prop("disabled", true)
+          .html('<i class="fas fa-spinner fa-spin"></i> Menghapus...');
+
+        $.ajax({
+          url: "/api/siswa/" + deleteId,
+          type: "DELETE",
+          dataType: "json",
+          success: function (response) {
+            if (response.success) {
+              showAlert(response.message, "success");
+              modalHapus.hide();
+              loadData();
+
+              // Reset button
+              $("#btnConfirmHapus")
+                .prop("disabled", false)
+                .html('<i class="fas fa-trash"></i> Hapus');
+
+              deleteId = null;
+            }
+          },
+          error: function () {
+            showAlert("Gagal menghapus data", "danger");
+            $("#btnConfirmHapus")
+              .prop("disabled", false)
+              .html('<i class="fas fa-trash"></i> Hapus');
+          },
+        });
+      }
+
+      // =====================================
+      // FUNGSI HELPER - TAMPILKAN ALERT
+      // =====================================
+      function showAlert(message, type) {
+        const alertHtml = `
+        <div class="alert alert-${type} alert-dismissible fade show" role="alert">
+          <strong>
+            ${
+              type === "success"
+                ? '<i class="fas fa-check-circle"></i> Sukses!'
+                : type === "danger"
+                  ? '<i class="fas fa-exclamation-circle"></i> Gagal!'
+                  : '<i class="fas fa-info-circle"></i> Info!'
+            }
+          </strong> ${message}
+          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+      `;
+
+        $("#alertContainer").html(alertHtml);
+
+        // Auto hide alert
+        setTimeout(function () {
+          $("#alertContainer").html("");
+        }, 5000);
+      }
+    </script>
+  </body>
+</html>

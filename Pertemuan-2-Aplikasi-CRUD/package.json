@@ -1,0 +1,25 @@
+{
+  "name": "aplikasi-crud-siswa",
+  "version": "1.0.0",
+  "description": "Aplikasi CRUD Siswa dengan Node.js, Express, Bootstrap dan jQuery",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "keywords": [
+    "crud",
+    "nodejs",
+    "express",
+    "bootstrap"
+  ],
+  "author": "Bintang Yudhistira",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "body-parser": "^1.20.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}

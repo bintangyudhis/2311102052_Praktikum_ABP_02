@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form Input - Aplikasi CRUD Siswa</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    />
+    <!-- Font Awesome Icon -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <!-- NAVBAR -->
+    <nav
+      class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top shadow"
+    >
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/">
+          <i class="fas fa-graduation-cap"></i> Aplikasi CRUD Siswa
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="fas fa-home"></i> Beranda
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="/form">
+                <i class="fas fa-edit"></i> Input Data
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/data">
+                <i class="fas fa-table"></i> Lihat Data
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main class="min-vh-100 py-5" style="background-color: #f8f9fa">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-7">
+            <!-- FORM CARD -->
+            <div class="card shadow-lg border-0">
+              <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">
+                  <i class="fas fa-pen-fancy"></i> Form Input Data Siswa
+                </h4>
+              </div>
+
+              <div class="card-body p-4">
+                <!-- Alert Messages -->
+                <div id="alertContainer"></div>
+
+                <!-- FORM INPUT DATA SISWA -->
+                <form id="formSiswa" class="needs-validation">
+                  <!-- Field: Nama -->
+                  <div class="mb-3">
+                    <label for="nama" class="form-label fw-bold">
+                      <i class="fas fa-user"></i> Nama Siswa
+                      <span class="text-danger">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      class="form-control form-control-lg"
+                      id="nama"
+                      placeholder="Masukkan nama lengkap siswa"
+                      required
+                    />
+                    <small class="text-muted">Contoh: Bintang Yudhistira</small>
+                  </div>
+
+                  <!-- Field: NIM -->
+                  <div class="mb-3">
+                    <label for="nim" class="form-label fw-bold">
+                      <i class="fas fa-id-card"></i> NIM (Nomor Induk Mahasiswa)
+                      <span class="text-danger">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      class="form-control form-control-lg"
+                      id="nim"
+                      placeholder="Masukkan NIM"
+                      required
+                    />
+                    <small class="text-muted">Contoh: 2311102052</small>
+                  </div>
+
+                  <!-- Field: Email -->
+                  <div class="mb-3">
+                    <label for="email" class="form-label fw-bold">
+                      <i class="fas fa-envelope"></i> Email
+                      <span class="text-danger">*</span>
+                    </label>
+                    <input
+                      type="email"
+                      class="form-control form-control-lg"
+                      id="email"
+                      placeholder="Masukkan email"
+                      required
+                    />
+                    <small class="text-muted">Contoh: bintang@email.com</small>
+                  </div>
+
+                  <!-- Field: Jurusan -->
+                  <div class="mb-4">
+                    <label for="jurusan" class="form-label fw-bold">
+                      <i class="fas fa-book"></i> Jurusan
+                      <span class="text-danger">*</span>
+                    </label>
+                    <select
+                      class="form-select form-select-lg"
+                      id="jurusan"
+                      required
+                    >
+                      <option value="">-- Pilih Jurusan --</option>
+                      <option value="Teknik Informatika">
+                        Teknik Informatika
+                      </option>
+                      <option value="Sistem Informasi">Sistem Informasi</option>
+                      <option value="Manajemen Informatika">
+                        Manajemen Informatika
+                      </option>
+                      <option value="Teknik Komputer">Teknik Komputer</option>
+                      <option value="Ilmu Komputer">Ilmu Komputer</option>
+                    </select>
+                  </div>
+
+                  <!-- Buttons -->
+                  <div class="d-grid gap-2 d-sm-flex justify-content-sm-end">
+                    <button
+                      type="reset"
+                      class="btn btn-secondary btn-lg"
+                      id="btnReset"
+                    >
+                      <i class="fas fa-redo"></i> Reset
+                    </button>
+                    <button
+                      type="submit"
+                      class="btn btn-primary btn-lg"
+                      id="btnSubmit"
+                    >
+                      <i class="fas fa-save"></i> Simpan Data
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <!-- INFO SECTION -->
+            <div class="card shadow-sm mt-4 border-0">
+              <div class="card-body">
+                <h6 class="text-primary mb-3">
+                  <i class="fas fa-info-circle"></i> Panduan Penggunaan
+                </h6>
+                <ul class="small text-muted mb-0">
+                  <li>
+                    Semua field bertanda
+                    <span class="text-danger">*</span> wajib diisi
+                  </li>
+                  <li>Email harus valid dengan format nama@domain.com</li>
+                  <li>Data akan disimpan ke database sistem</li>
+                  <li>
+                    Setelah submit, Anda bisa melihat data di halaman "Lihat
+                    Data"
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-dark text-white text-center py-3 mt-5">
+      <div class="container-fluid">
+        <p class="mb-0">
+          © 2024 Aplikasi CRUD Siswa | Dibuat dengan
+          <i class="fas fa-heart text-danger"></i> untuk Praktikum ABP
+        </p>
+      </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="/js/script.js"></script>
+
+    <script>
+
+      // FORM SUBMISSION - CREATE DATA
+
+      $(document).ready(function () {
+        // Saat form di-submit
+        $("#formSiswa").on("submit", function (e) {
+          e.preventDefault();
+
+          // Ambil nilai input
+          const nama = $("#nama").val().trim();
+          const nim = $("#nim").val().trim();
+          const email = $("#email").val().trim();
+          const jurusan = $("#jurusan").val().trim();
+
+          // Validasi input
+          if (!nama || !nim || !email || !jurusan) {
+            showAlert("Semua field harus diisi!", "danger");
+            return;
+          }
+
+          // Disable submit button saat proses
+          $("#btnSubmit")
+            .prop("disabled", true)
+            .html('<i class="fas fa-spinner fa-spin"></i> Menyimpan...');
+
+          // AJAX POST ke API
+          $.ajax({
+            url: "/api/siswa",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify({
+              nama: nama,
+              nim: nim,
+              email: email,
+              jurusan: jurusan,
+            }),
+            success: function (response) {
+              if (response.success) {
+                showAlert(response.message, "success");
+
+                // Reset form
+                $("#formSiswa")[0].reset();
+
+                // Reset button
+                $("#btnSubmit")
+                  .prop("disabled", false)
+                  .html('<i class="fas fa-save"></i> Simpan Data');
+
+                // Perbarui counter data
+                updateDataCounter();
+              }
+            },
+            error: function (xhr) {
+              const errorMsg =
+                xhr.responseJSON?.message ||
+                "Terjadi kesalahan saat menyimpan data";
+              showAlert(errorMsg, "danger");
+
+              // Reset button
+              $("#btnSubmit")
+                .prop("disabled", false)
+                .html('<i class="fas fa-save"></i> Simpan Data');
+            },
+          });
+        });
+
+        // Update counter data
+        function updateDataCounter() {
+          $.ajax({
+            url: "/api/siswa",
+            type: "GET",
+            dataType: "json",
+            success: function (data) {
+              console.log("Data tersimpan: " + data.length + " siswa");
+            },
+          });
+        }
+      });
+
+      // Fungsi untuk menampilkan alert
+      function showAlert(message, type) {
+        const alertHtml = `
+        <div class="alert alert-${type} alert-dismissible fade show" role="alert">
+          <strong>
+            ${
+              type === "success"
+                ? '<i class="fas fa-check-circle"></i> Sukses!'
+                : '<i class="fas fa-exclamation-circle"></i> Peringatan!'
+            }
+          </strong> ${message}
+          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+      `;
+
+        $("#alertContainer").html(alertHtml);
+
+        // Auto hide alert setelah 5 detik
+        setTimeout(function () {
+          $("#alertContainer").html("");
+        }, 5000);
+      }
+    </script>
+  </body>
+</html>
