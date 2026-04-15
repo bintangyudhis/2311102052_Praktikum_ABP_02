@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tugas AJAX Profil</title>
+    <style>
+      :root {
+        --bg-start: #f3efe7;
+        --bg-end: #d7e7f5;
+        --card-bg: rgba(255, 255, 255, 0.88);
+        --text-main: #1f2a37;
+        --text-soft: #526072;
+        --accent: #c96c50;
+        --accent-dark: #a44f36;
+        --border: rgba(82, 96, 114, 0.18);
+        --shadow: 0 24px 60px rgba(31, 42, 55, 0.16);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        font-family: Georgia, "Times New Roman", serif;
+        color: var(--text-main);
+        background:
+          radial-gradient(
+            circle at top left,
+            rgba(255, 255, 255, 0.85),
+            transparent 35%
+          ),
+          linear-gradient(135deg, var(--bg-start), var(--bg-end));
+      }
+
+      .container {
+        width: 100%;
+        max-width: 760px;
+      }
+
+      .card {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 28px;
+        box-shadow: var(--shadow);
+        overflow: hidden;
+        backdrop-filter: blur(10px);
+      }
+
+      .hero {
+        padding: 40px 36px 20px;
+        background:
+          linear-gradient(
+            135deg,
+            rgba(201, 108, 80, 0.14),
+            rgba(255, 255, 255, 0.1)
+          ),
+          linear-gradient(
+            180deg,
+            rgba(255, 255, 255, 0.7),
+            rgba(255, 255, 255, 0)
+          );
+      }
+
+      .label {
+        display: inline-block;
+        margin-bottom: 14px;
+        padding: 8px 14px;
+        border-radius: 999px;
+        font-size: 13px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--accent-dark);
+        background: rgba(201, 108, 80, 0.12);
+      }
+
+      h1 {
+        margin: 0 0 14px;
+        font-size: clamp(2rem, 4vw, 3.6rem);
+        line-height: 1.05;
+      }
+
+      .subtitle {
+        margin: 0;
+        max-width: 560px;
+        font-size: 1.05rem;
+        line-height: 1.7;
+        color: var(--text-soft);
+      }
+
+      .content {
+        padding: 28px 36px 36px;
+      }
+
+      .action-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        align-items: center;
+        margin-bottom: 24px;
+      }
+
+      button {
+        border: none;
+        border-radius: 999px;
+        padding: 14px 24px;
+        font-size: 1rem;
+        font-weight: 700;
+        font-family: inherit;
+        color: #fff;
+        cursor: pointer;
+        background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+        box-shadow: 0 12px 30px rgba(164, 79, 54, 0.28);
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+
+      button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 16px 32px rgba(164, 79, 54, 0.34);
+      }
+
+      button:active {
+        transform: translateY(0);
+      }
+
+      .hint {
+        margin: 0;
+        color: var(--text-soft);
+        font-size: 0.98rem;
+      }
+
+      .result-box {
+        min-height: 160px;
+        padding: 24px;
+        border-radius: 22px;
+        border: 1px solid var(--border);
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.92),
+          rgba(243, 239, 231, 0.72)
+        );
+      }
+
+      .placeholder {
+        margin: 0;
+        color: var(--text-soft);
+        line-height: 1.7;
+      }
+
+      .profile-card {
+        display: grid;
+        gap: 14px;
+      }
+
+      .profile-title {
+        margin: 0;
+        font-size: 1.5rem;
+      }
+
+      .profile-item {
+        margin: 0;
+        padding: 14px 16px;
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.72);
+        border: 1px solid rgba(82, 96, 114, 0.12);
+        color: var(--text-main);
+      }
+
+      .profile-item strong {
+        color: var(--accent-dark);
+      }
+
+      @media (max-width: 640px) {
+        .hero,
+        .content {
+          padding-left: 22px;
+          padding-right: 22px;
+        }
+
+        .result-box {
+          padding: 18px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="container">
+      <section class="card">
+        <div class="hero">
+          <span class="label">Tugas Modul AJAX</span>
+          <h1>Ambil data profil dari server tanpa reload halaman.</h1>
+          <p class="subtitle">
+            Halaman ini memakai JavaScript <em>fetch()</em> untuk mengambil data
+            dari <code>data.php</code>, lalu menampilkannya secara dinamis ke
+            dalam halaman.
+          </p>
+        </div>
+
+        <div class="content">
+          <div class="action-row">
+            <button id="btn-profil">Tampilkan Profil</button>
+            <p class="hint">
+              Klik tombol untuk mengambil data JSON dari server.
+            </p>
+          </div>
+
+          <div class="result-box" id="hasil-profil">
+            <p class="placeholder">
+              Data profil akan muncul di sini setelah tombol ditekan.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const tombolProfil = document.getElementById("btn-profil");
+      const hasilProfil = document.getElementById("hasil-profil");
+
+      tombolProfil.addEventListener("click", function () {
+        hasilProfil.innerHTML =
+          '<p class="placeholder">Mengambil data dari server...</p>';
+
+        fetch("data.php")
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (data) {
+            hasilProfil.innerHTML =
+              '<div class="profile-card">' +
+              '<h2 class="profile-title">Profil Berhasil Dimuat</h2>' +
+              '<p class="profile-item"><strong>Nama:</strong> ' +
+              data.nama +
+              "</p>" +
+              '<p class="profile-item"><strong>Pekerjaan:</strong> ' +
+              data.pekerjaan +
+              "</p>" +
+              '<p class="profile-item"><strong>Lokasi:</strong> ' +
+              data.lokasi +
+              "</p>" +
+              "</div>";
+          })
+          .catch(function () {
+            hasilProfil.innerHTML =
+              '<p class="profile-item"><strong>Oops:</strong> Data gagal diambil dari server.</p>';
+          });
+      });
+    </script>
+  </body>
+</html>
